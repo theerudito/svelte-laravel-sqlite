@@ -10,7 +10,7 @@ use Inertia\Inertia;
 // });
 
 
-// Route::resource( '/personajes', PersonajesController::class);
-
-
 Route::resource( '/', PersonajesController::class);
+
+
+//Route::resource( '/personajes', PersonajesController::class);

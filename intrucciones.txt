@@ -1,0 +1,90 @@
+// CREAR UN PROYECTO EN LARAVEL INERTIA Y SVELTE 
+1.- crear un proyecto en laravel con el comando:
+
+composer create-project --prefer-dist laravel/laravel nombre_proyecto
+
+2.- instalar inertia con el comando:
+
+composer require inertiajs/inertia-laravel
+
+3.- instalar inertiajs para svelte
+
+npm install @inertiajs/inertia-svelte
+npm install @inertiajs/svelte
+
+4.- en el archvo vite.config.js agregar el siguiente codigo:
+
+import { defineConfig } from 'vite';
+import laravel from 'laravel-vite-plugin';
+import { svelte } from '@sveltejs/vite-plugin-svelte';
+
+export default defineConfig({
+    plugins: [
+        laravel({
+            input: ['resources/js/app.js'],
+            refresh: true,
+        }),
+        svelte({
+            compilerOptions: {
+                compatibility: {
+                    componentApi: 4, // Activar compatibilidad con la API de Svelte 4
+                },
+            },
+        }),
+    ],
+});
+
+5.- en el archivo app.js agregar el siguiente codigo:
+
+import { createInertiaApp } from '@inertiajs/inertia-svelte';
+
+createInertiaApp({
+    resolve: name => import(`./Pages/${name}.svelte`),
+    setup({ el, App, props }) {
+        new App({
+            target: el,
+            props,
+        });
+    },
+});
+
+
+6.- en el archivo app.blade.php agregar el siguiente codigo:
+
+<!DOCTYPE html>
+<html>
+<head>
+    @vite(['resources/js/app.js'])
+</head>
+<body>
+    @inertia
+</body>
+</html>
+
+7.- crea una carptea llamada Pages en la carpeta resources/js y dentro de ella crea un archivo llamado Home.svelte 
+
+<script>
+    export let mensaje = 'Hola Mundo';
+
+    console.log(personajes);
+    
+</script>
+
+<h1>{mensaje}</h1>
+
+8.- en el archivo web.php agregar el siguiente codigo:
+
+
+Route::get('/', function(){
+  return Inertia::render('Home');
+});
+
+9.- ejecutar el comando npm run dev para compilar los archivos de svelte
+
+10.- ejecutar el comando php artisan serve para iniciar el servidor de laravel
+
+
+
+
+
+
