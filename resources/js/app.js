@@ -1,5 +1,3 @@
-// dame el codigo
-
 import { createInertiaApp } from "@inertiajs/inertia-svelte";
 
 createInertiaApp({
