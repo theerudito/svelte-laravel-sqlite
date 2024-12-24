@@ -11,5 +11,5 @@ class Personajes extends Model
 
     protected $table = 'personajes';
     protected $fillable = ['nombre', 'clan', 'edad'];
-    public $timestamps = false;
+    public $timestamps = true;
 }
